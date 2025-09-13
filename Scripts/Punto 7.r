@@ -16,9 +16,9 @@ Datos <- read_excel(ruta, sheet = "Exhibit 1")
 # Renombrar columnas para evitar espacios
 names(Datos) <- make.names(names(Datos))
 
-# ------------------------------------------------------
-# 7a) Regresión simple: Total U.S. Gross ~ Opening Gross
-# ------------------------------------------------------
+#---------PUNTO A------------------------------------------------------------
+
+# Regresión simple: Total U.S. Gross ~ Opening Gross
 model7a <- lm(Total.U.S..Gross ~ Opening.Gross, data = Datos)
 summary(model7a)
 
@@ -36,7 +36,7 @@ resultados7a <- summary(model7a)$coefficients %>%
 tabla7a <- resultados7a %>%
   gt() %>%
   tab_header(
-    title = "Tabla 7.1: Regresión simple",
+    title = "Regresión simple",
     subtitle = "Total U.S. Gross ~ Opening Gross"
   ) %>%
   fmt_number(
@@ -47,10 +47,9 @@ tabla7a <- resultados7a %>%
 # Mostrar tabla
 tabla7a
 
+#---------PUNTO B Y C--------------------------------------------------------
 
-# ------------------------------------------------------
-# 7b-7c) Test de hipótesis H0: beta = 4 (Regla del 25%)
-# ------------------------------------------------------
+# Test de hipótesis H0: beta = 4 (Regla del 25%)
 b_hat <- coef(model7a)["Opening.Gross"]
 se_b <- summary(model7a)$coefficients["Opening.Gross","Std. Error"]
 df_resid <- df.residual(model7a)
@@ -69,7 +68,7 @@ tabla_test <- data.frame(
 tabla7b <- tabla_test %>%
   gt() %>%
   tab_header(
-    title = "Tabla 7.2: Prueba de hipótesis",
+    title = "Prueba de hipótesis",
     subtitle = "H0: β = 4 (Regla del 25%)"
   ) %>%
   fmt_number(
@@ -80,10 +79,9 @@ tabla7b <- tabla_test %>%
 # Mostrar tabla
 tabla7b
 
+#---------PUNTO E------------------------------------------------------------
 
-# ------------------------------------------------------
-# 7e) Modelo ampliado (regresión múltiple más sólida)
-# ------------------------------------------------------
+# Modelo ampliado (regresión múltiple más sólida)
 model7e_lin <- lm(Total.U.S..Gross ~ Opening.Gross + Budget + Sequel +
                     Opening.Theatres + Critics..Opinion + Known.Story,
                   data = Datos)
@@ -103,7 +101,7 @@ resultados7e <- summary(model7e_lin)$coefficients %>%
 tabla7e <- resultados7e %>%
   gt() %>%
   tab_header(
-    title = "Tabla 7.3: Regresión múltiple",
+    title = "Regresión múltiple",
     subtitle = "Modelo ampliado con controles"
   ) %>%
   fmt_number(
@@ -114,10 +112,7 @@ tabla7e <- resultados7e %>%
 # Mostrar tabla
 tabla7e
 
-
-# ------------------------------------------------------
-# 7g) R²: proporción explicada
-# ------------------------------------------------------
+#---------PUNTO G------------------------------------------------------------
 
 # R² simple
 r2_simple <- summary(model7a)$r.squared
@@ -144,7 +139,7 @@ tabla_r2 <- data.frame(
 tabla7g <- tabla_r2 %>%
   gt() %>%
   tab_header(
-    title = "Tabla 7.4: Proporción explicada",
+    title = "Proporción explicada",
     subtitle = "Comparación de R² entre modelos"
   ) %>%
   fmt_number(

@@ -16,6 +16,8 @@ Datos <- read_excel(ruta, sheet = "Exhibit 1")
 # Renombrar columnas para evitar espacios
 names(Datos) <- make.names(names(Datos))
 
+#---------PUNTO A Y B--------------------------------------------------------
+
 # Modelo inicial (preproducción + estreno)
 model1 <- lm(Opening.Gross ~ Budget + Known.Story + Sequel + MPAA_D +
                Opening.Theatres + Summer + Holiday + Christmas,
@@ -27,20 +29,17 @@ summary(model1)
 model_final <- step(model1, direction = "backward")
 summary(model_final)
 
-# Interpretar coeficientes
+#---------INTERPRETACIÓN COEFICIENTES----------------------------------------
+
 coef(model_final)
+
+#---------PUNTO C------------------------------------------------------------
 
 # Efecto de +100 cines
 effect_100 <- coef(model_final)["Opening.Theatres"] * 100
 effect_100
 
 # Intervalo de confianza del 95%
-confint(model_final, "Opening.Theatres", level = 0.95) * 100
-
-# Estimación puntual
-effect_100 <- coef(model_final)["Opening.Theatres"] * 100
-
-# Intervalo de confianza
 ci_100 <- confint(model_final, "Opening.Theatres", level = 0.95) * 100
 
 # Crear data frame con resultados
@@ -50,7 +49,7 @@ tabla_effect <- data.frame(
   IC_95_Upper = ci_100[2]
 )
 
-# Convertir en tabla bonita con gt
+# Convertir en tabla con gt
 tabla_effect_gt <- tabla_effect %>%
   gt() %>%
   tab_header(
@@ -66,10 +65,10 @@ tabla_effect_gt <- tabla_effect %>%
 # Mostrar tabla
 tabla_effect_gt
 
-# Crear tabla de resultados con coeficientes
+#---------TABLA DE RESULTADOS REGRESIÓN--------------------------------------
+
 resultados <- summary(model_final)$coefficients
 
-#Tabla de resultados 
 tabla <- resultados %>%
   as.data.frame() %>%
   tibble::rownames_to_column("Variable") %>%
