@@ -36,6 +36,15 @@ El proyecto está desarrollado en R, un lenguaje y entorno de programación espe
 * _Carpeta Graficas:_
 + Tabla 6.1 (Correspondiente al punto 6)
 + Tabla 6.2 (Correspondiente al punto 6)
++ Tabla 7.1 (Correspondiente al punto 7)
++ Tabla 7.2 (Correspondiente al punto 7)
++ Tabla 7.3 (Correspondiente al punto 7)
++ Tabla 7.4 (Correspondiente al punto 7)
++ Tabla 8.1 (Correspondiente al punto 8)
++ Tabla 8.2 (Correspondiente al punto 8)
++ Tabla 9 (Correspondiente al punto 9)
++ 
++
 
 * _Carpeta Resultados:_
         Contiene Caso2_Hollywood.pdf y Caso2_Hollywood.docx con el informe de resultados de cada uno de los puntos del caso justificados.
